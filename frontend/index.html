@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>SRMS • Login</title>
+  <link rel="stylesheet" href="css/neon.css"/>
+  <link rel="stylesheet" href="css/styles.css"/>
+</head>
+<body>
+  <div class="blobs">
+    <div class="blob"></div><div class="blob"></div><div class="blob"></div>
+  </div>
+  <div class="container">
+    <header class="header">
+      <h2 class="brand">Student Result Management System</h2>
+      <div class="neon-chip">FastAPI • MySQL • Vanilla JS</div>
+    </header>
+
+    <div class="card" style="max-width:540px;margin:40px auto;">
+      <h3>Login</h3>
+      <p class="notice">Default demo credentials: admin/admin123, teacher_cs/teacher123, student username = s{Roll_No}, password student123</p>
+      <div class="row">
+        <div style="flex:1;">
+          <label>Username</label>
+          <input id="username" placeholder="e.g. admin"/>
+        </div>
+      </div>
+      <div class="row">
+        <div style="flex:1;">
+          <label>Password</label>
+          <input id="password" type="password" placeholder="••••••••"/>
+        </div>
+      </div>
+      <div style="margin-top:12px;">
+        <button class="neon-btn" onclick="login()">Sign in</button>
+      </div>
+      <p id="msg"></p>
+    </div>
+  </div>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    async function login(){
+      const u = document.getElementById('username').value.trim();
+      const p = document.getElementById('password').value.trim();
+      const res = await apiLogin(u,p);
+      const token = res?.access_token;
+      if(!token){ document.getElementById('msg').textContent='Invalid credentials'; document.getElementById('msg').className='error'; return; }
+      localStorage.setItem('token', token);
+      // decode role from JWT payload (simple parse)
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      const role = payload.role;
+      if(role === 'admin') location.href = 'admin.html';
+      else if(role === 'teacher') location.href = 'teacher.html';
+      else location.href = 'student.html';
+    }
+  </script>
+</body>
+</html>

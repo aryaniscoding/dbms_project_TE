@@ -1,0 +1,9 @@
+/* styles.css — base utilities */
+.container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+.section { margin: 16px 0; }
+.row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.kpi { font-size: 28px; font-weight: 700; }
+.tag { padding: 4px 8px; border-radius: 8px; background: #ffffff18; border: 1px solid #ffffff30; }
+.center { display: grid; place-items: center; }
+.hidden { display: none !important; }
+.sticky { position: sticky; top: 68px; z-index: 10; }

@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>SRMS • Admin</title>
+  <link rel="stylesheet" href="css/neon.css"/>
+  <link rel="stylesheet" href="css/styles.css"/>
+</head>
+<body>
+  <div class="blobs"><div class="blob"></div><div class="blob"></div><div class="blob"></div></div>
+  <div class="container">
+    <div class="header">
+      <h3>Admin Dashboard</h3>
+      <div>
+        <button class="neon-btn" onclick="logout()">Logout</button>
+      </div>
+    </div>
+
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Subjects</h3>
+        <div class="row">
+          <input id="sub_code" placeholder="Code e.g. CS102">
+          <input id="sub_name" placeholder="Name e.g. Data Structures">
+          <input id="sub_credits" type="number" value="4" min="1" max="6">
+          <button class="neon-btn" onclick="createSubject()">Add</button>
+        </div>
+        <table class="table" id="subjects"></table>
+      </div>
+
+      <div class="card">
+        <h3>Create User</h3>
+        <div class="row">
+          <input id="u_username" placeholder="username">
+          <input id="u_password" type="password" placeholder="password">
+          <select id="u_role">
+            <option value="teacher">teacher</option>
+            <option value="student">student</option>
+            <option value="admin">admin</option>
+          </select>
+        </div>
+        <div class="row">
+          <input id="u_full_name" placeholder="full name">
+          <input id="u_email" placeholder="email">
+          <input id="u_student_id" type="number" placeholder="student_id (for student)">
+          <button class="neon-btn" onclick="createUser()">Create</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Assign Teacher to Subject</h3>
+        <div class="row">
+          <input id="as_subject_id" type="number" placeholder="subject_id">
+          <input id="as_teacher_user_id" type="number" placeholder="teacher_user_id">
+          <button class="neon-btn" onclick="assignTeacher()">Assign</button>
+        </div>
+        <div id="as_msg"></div>
+      </div>
+
+      <div class="card">
+        <h3>Student Users</h3>
+        <table class="table" id="students"></table>
+      </div>
+    </div>
+  </div>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
